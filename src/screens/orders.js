@@ -1,30 +1,38 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
 
 import AddButton from '../components/AddButton';
-import { fetchOrders } from '../actions/orders';
+import { fetchOrders, cancelListener } from '../actions/orders';
 
 class Orders extends Component {
+	state = {
+		uid: null
+	}
+
 	componentDidMount() {
+		this.setState({ uid: firebase.auth().currentUser.uid });
 		this.props.fetchOrders();
+	}
+
+	componentWillUnmount() {
+		this.props.cancelListener(this.state.uid);
 	}
 
 	renderOrders() {
 		return _.map(this.props.orders, (order, id) => {
-			const { address, city, state, due, scheduled, status, notes } = order;
+			const { address, scheduled, status, access, notes } = order;
 
 			return (
 				<TableRow key={id}>
 					<td>{ address }</td>
-					<td>{ city }</td>
-					<td>{ state }</td>
-					<td>{ due }</td>
+					<td>{ access }</td>
+					<td>{ notes }</td>
 					<td>{ scheduled }</td>
 					<td>{ status }</td>
-					<td>{ notes }</td>
 				</TableRow>
 			);
 		});
@@ -38,12 +46,10 @@ class Orders extends Component {
 				<thead>
 					<tr>
 						<th>Address</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Due</th>
+						<th>Property Access</th>
+						<th>Notes</th>
 						<th>Scheduled</th>
 						<th>Status</th>
-						<th>Notes</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,4 +66,4 @@ function mapStateToProps(state) {
 	return { orders: state.orders };
 }
 
-export default connect(mapStateToProps, { fetchOrders })(Orders);
+export default connect(mapStateToProps, { fetchOrders, cancelListener })(Orders);

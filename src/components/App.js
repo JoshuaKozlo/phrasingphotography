@@ -28,15 +28,15 @@ class BasicApp extends Component {
  render() {
     return (
       <App>
-        <Routes auth={this.props.auth} />
+        <Routes user={this.props.user} />
       </App>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ auth }) {
   return { 
-    auth: state.auth
+    user: auth.user
   }
 }
 

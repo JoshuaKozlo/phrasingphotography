@@ -25,7 +25,7 @@ const Cart = (props) => {
 					<td>{ props.order.state }</td>
 					<td>{ props.order.access }</td>
 					<td>{ props.order.notes }</td>
-					<td><Button icon={<EditIcon />} onClick={props.handleEdit}/></td>
+					<td><Button label="Edit" icon={<EditIcon />} plain onClick={props.handleEdit}/></td>
 				</TableRow>
 			</tbody>
 		</Table>

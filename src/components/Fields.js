@@ -34,7 +34,7 @@ export const PropertyAccessField = ({ input, meta }) => {
 		<FormField label="Property Access" error={meta.touched ? meta.error : ''}>
 			<textarea 
 				className="text-area" 
-				placeholder="The code for the key storage box at the front door is 3542"
+				placeholder="The house key is under the door mat!"
 				{...input}
 			/>
 		</FormField>
@@ -46,9 +46,48 @@ export const NotesField = ({ input, meta }) => {
 		<FormField label="Notes">
 			<textarea
 				className="text-area"
-				placeholder="The fireplace mantel is beautiful! Can you get some shots focusing on it? Also the propety will not be ready for the photoshoot until August 15th"
 				{...input}
 			/>
+		</FormField>
+	);
+}
+
+export const EmailField = ({ input, meta }) => {
+	return (
+		<FormField label="Email" error={meta.touched ? meta.error : ''}>
+			<TextInput type="email" name="email" id="email" onDOMChange={input.onChange} {...input} />
+		</FormField>
+	);
+}
+
+export const PasswordField = ({ input, meta }) => {
+	return (
+		<FormField label="Password" error={meta.touched ? meta.error : ''}>
+			<TextInput type="password" name="password" id="password" onDOMChange={input.onChange} {...input} />
+		</FormField>
+	);
+}
+
+export const PasswordConfirmField = ({ input, meta }) => {
+	return (
+		<FormField label="Confirm Password" error={meta.touched ? meta.error : ''}>
+			<TextInput type="password" name="password-confirm" id="password-confirm" onDOMChange={input.onChange} {...input} />
+		</FormField>
+	);
+}
+
+export const NameField = ({ input, meta }) => {
+	return (
+		<FormField label="Full Name or Agency" error={meta.touched ? meta.error : ''}>
+			<TextInput name="name" id="name" onDOMChange={input.onChange} {...input} />
+		</FormField>
+	);
+}
+
+export const PhoneField = ({ input, meta }) => {
+	return (
+		<FormField label="Phone" error={meta.touched ? meta.error : ''}>
+			<TextInput name="phone" id="phone" placeHolder="910-111-1111" onDOMChange={input.onChange} {...input} />
 		</FormField>
 	);
 }

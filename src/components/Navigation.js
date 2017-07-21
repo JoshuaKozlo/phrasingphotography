@@ -1,43 +1,50 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
+
 import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
 import Box from 'grommet/components/Box';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
-
 import MoreIcon from 'grommet/components/icons/base/More';
+import LoginIcon from 'grommet/components/icons/base/Login';
 
-import firebase from 'firebase';
+import Logo from './Logo';
+
 
 class Navigation extends Component {
 
-    renderTitle() {
-        const path = this.props.location.pathname;
-
+    renderTitle(path) {
         if (path === '/orders') {
-            return 'My Orders'
+            return <Title>My Orders</Title>
         } else if (path === '/orders/new') {
-            return 'New Order'
+            return <Title>New Order</Title>
         } else if (path === '/orders/new/checkout') {
-            return 'Check Out'
+            return <Title>Check Out</Title>
         }
 
-        return 'Pie In The Sky'
+        return <Title className="title">Phrasing Photography</Title>
+    }
+
+    renderLogo(path) {
+        if (path === '/') {
+            return <Logo/>
+        }
     }
 
     renderRight() {
-        if (this.props.auth) {
+        if (this.props.user) {
             return (
                 <Menu icon={<MoreIcon/>}
                     dropAlign={{ right: 'right' }}
                 >
-                    <Anchor>
+                    <Anchor onClick={() => this.props.history.push('/orders')}>
                         My Orders
                     </Anchor>
-                    <Anchor>
+                    <Anchor onClick={() => this.props.history.push('/orders/new')}>
                         New Order
                     </Anchor>
-                    <Anchor>
+                    <Anchor onClick={() => firebase.auth().signOut()}>
                         Sign Out
                     </Anchor>
                 </Menu>
@@ -45,19 +52,21 @@ class Navigation extends Component {
         }
         return (
             <Anchor
+                icon={<LoginIcon />}
+                primary
                 label="Sign In"
-                onClick={() => firebase.auth().signInWithEmailAndPassword('test@test.com', '1qaz1qaz')}
+                onClick={() => this.props.history.push('/login')}
             />
         );
     }
 
     render() {
-        console.log(this.props)
+        const path = this.props.location.pathname;
+
         return (
             <Header fixed={true} float={false}>
-                <Title>
-                	{this.renderTitle()}
-                </Title>
+                {this.renderLogo(path)}
+                {this.renderTitle(path)}
                 <Box flex justify='end'direction='row'responsive={false}>
                     {this.renderRight()}
                 </Box>

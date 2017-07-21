@@ -8,3 +8,17 @@
 .text-area {
 	min-height: 80px;
 }
+
+.title {
+	font-family: 'Reenie Beanie', cursive;
+}
+
+.logo {
+	padding-bottom: 5px;
+	width: 40px;
+	fill: #FFF;
+}
+
+iframe, object, embed {
+    max-width: 100%;
+}

@@ -20,7 +20,6 @@ class NewOrderForm extends Component {
 
 	render() {
 		const { handleSubmit } = this.props
-
 		return (
 			<Box align="center">
 				<Heading>Property Info</Heading>

@@ -108,11 +108,8 @@ class Home extends Component {
 				</Box>
 				</Box>
 				<Box full="horizontal" pad="medium" colorIndex="brand">
-					<Headline align="center" size="small">Get everything for only</Headline>
-					<Headline align="center" size="small" strong>$200 / per property</Headline>
-					<Box align="center">
-						<Anchor label="Sign Up Now" primary icon={<LoginIcon />} onClick={() => this.props.history.push('/signup')} />
-					</Box>
+					<Headline align="center" size="small" strong>Email: phrasing.photo@gmail.com</Headline>
+					<Headline align="center" size="small" strong>Call: 910.225.4337</Headline>
 				</Box>
 				<Lightbox 
 					images={gallery}
